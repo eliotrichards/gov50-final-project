@@ -11,4 +11,4 @@ install.packages("distill")
 ```
 
 ## Project thoughts
-For my final project, I am interested in exploring data related to government spending on education. Hopefully, my project will look at government spending on education in the United States, with the aim to examine yearly trends, the distribution of funds among different levels of education, and the comparison between spending and educational outcomes. I am planning on using the U.S. government's education spending data, which is public information. 
+For my final project, I am interested in exploring data related to government spending on education. Hopefully, my project will look at government spending on education in the United States, with the aim to examine yearly trends, the distribution of funds among different levels of education, and the comparison between spending and educational outcomes. I am planning on using the U.S. government's education spending data, which should be easily accessible ublic information. 
