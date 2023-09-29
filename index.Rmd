@@ -1,14 +1,14 @@
 ---
 title: "Gov 50 Final Project"
-author: "Your Name Here"
-description: "My final project"
+author: "El Richards"
+description: "My final project for Gov50"
 output:
   distill::distill_article:
     self_contained: false
 ---
-
-
+```{r}
+install.packages("distill")
+```
 
 ## Project thoughts
-
-I am interested in exploring data related to...
+I am interested in exploring data related to government spending on education. Hopefully, my project will look at government spending on education in the United States, with the aim to examine yearly trends, the distribution of funds among different levels of education, and the comparison between spending and educational outcomes. I am planning on using the U.S. government's education spending data, which is public information. 
