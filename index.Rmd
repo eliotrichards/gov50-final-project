@@ -9,6 +9,9 @@ output:
 ```{r}
 install.packages("distill")
 ```
+```{r}
+library(distill)
+```
 
 ## Project thoughts
 For my final project, I am interested in exploring data related to government spending on education. Hopefully, my project will look at government spending on education in the United States, with the aim to examine yearly trends, the distribution of funds among different levels of education, and the comparison between spending and educational outcomes. To do this, I am planning on using the U.S. government's education spending data, this should be easily accessible public information. 
