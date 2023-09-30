@@ -7,8 +7,7 @@ output:
     self_contained: false
 ---
 ```{r}
-install.packages("distill")
-library(distill)
+install.packages("distill", repos = "http://cran.us.r-project.org")
 ```
 
 ## Project thoughts
