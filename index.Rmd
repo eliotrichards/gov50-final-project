@@ -23,3 +23,28 @@ Hypothesis: I will be trying to see if the increase in government spending on pr
 Given the outline of my thinking above, I will be looking at Government Spending on Primary and Secondary Education (measured as a percentage of GDP). This variable will depict the level of financial investment made by the government in primary and secondary education. Given the data set that I have chosen, this can be measured annually and I expect the outcome to vary over time. In my research, the outcome variable will be Standardized Test Scores, this outcome variable will allow me to measure educational performance. I will attempt to look at this on multiple levels--state, district, or school level--and can be collected over multiple years to track changes over time.
 
 To support my hypothesis, I will look for a positive correlation between increased government spending on education and improved standardized test scores among students over several years. Moreover, if a narrowing of the  gap between students in high-resource and low-resource schools as government spending on education increases, my hypothesis will also be proved correct. Paradoxically, if there is no significant correlation between government spending on education and changes in standardized test scores, I was wrong in the initial hypothesis that I presented. Regardless of whether or not my initial thinking was correct or not, these patterns will help to determine whether increased government spending on education has a positive impact on educational outcomes and equity across public/governmentally funded schools. 
+
+### Milestone 3
+```{r}
+library(ggplot2)
+library(tidyverse)
+```
+
+```{r}
+read_csv("PolData.csv")
+```
+```{r}
+education_data <- read.csv("PolData.csv")
+```
+```{r}
+education_data_filtered <- education_data[education_data$year_start >= 1950 & education_data$year_start <= 2000, ]
+
+ggplot(education_data_filtered, aes(x = year_start)) +
+  geom_histogram(binwidth = 1, fill = "blue", color = "black") +
+  theme_minimal() +
+  labs(title = "Distribution of Educational Policy Start Years (1950-2000)",
+       x = "Start Year",
+       y = "Count of Policies") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+This graph shows the number of educational policies that were created each year from 1950 to 2000. The higher the bar, the moer educational programs/policies were initiated that year, while the opposite is true for the lower bars. Moreover, this graph helps us to see when more policies were implemented, giving us a clear understand of when more money was spent to better education.
