@@ -48,3 +48,4 @@ ggplot(education_data_filtered, aes(x = year_start)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 This graph shows the number of educational policies that were created each year from 1950 to 2000. The higher the bar, the moer educational programs/policies were initiated that year, while the opposite is true for the lower bars. Moreover, this graph helps us to see when more policies were implemented, giving us a clear understand of when more money was spent to better education.
+
