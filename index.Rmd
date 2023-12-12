@@ -16,7 +16,7 @@ For my final project, I am interested in exploring data related to government sp
 ## Milestone 2
 The data set I will be using the following: https://github.com/erikgahner/PolData. Specifially, the data set entitled "Education Policies and Systems across Modern History."
 
-Research question: How has federal government spending on education in the United States evolved and changed over the past decades? What is its impact on educational outcomes at different levels of the education system?
+Research question: How has federal government spending on education in the United States evolved and changed over the past decades? What is its impact on educational outcomes at different levels of the education system? How can we see the impact of implemented policies and their connection with the amount of funding and better education.
 
 Hypothesis: I will be trying to see if the increase in government spending on primary and secondary education in the United States, will positively correlate with improved standardized test scores among students, thereby reducing educational disparities. More over, I will be looking into targeted forms of investments meant to improve resource equity and allocation among schools.
 
@@ -47,5 +47,28 @@ ggplot(education_data_filtered, aes(x = year_start)) +
        y = "Count of Policies") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
-This graph shows the number of educational policies that were created each year from 1950 to 2000. The higher the bar, the moer educational programs/policies were initiated that year, while the opposite is true for the lower bars. Moreover, this graph helps us to see when more policies were implemented, giving us a clear understand of when more money was spent to better education.
+This graph shows the number of educational policies that were created each year from 1950 to 2000. The higher the bar, the more educational programs/policies were initiated that year, while the opposite is true for the lower bars. Moreover, this graph helps us to see when more policies were implemented, giving us a clear understand of when more money was spent to better education.
+
+## Milestone 4
+
+```{r}
+library(dplyr)
+library(knitr)
+
+names(education_data)
+```
+```{r}
+education_data_filtered <- education_data[education_data$year_start >= 1950 & education_data$year_start <= 2000, ]
+
+summary_table <- education_data_filtered |>
+  group_by(year_start) |>
+  summarize(Count_of_Policies = n())
+
+kable(summary_table, caption = "Count of Educational Policies by Start Year (1950-2000)")
+```
+
+Given the summary table output above, we can see that the count of educational policies by start year from 1950 to 2000 indicates several notable trends. The peaks in educational policy implementation in certain years, particularly in 1960, 1970, 1980, 1989, and 1990, highlight periods where more legislative or policy activity was applied to the education system. Paradoxically, in 1953, 1954, 1956, and 1974, there were minimal implementations of policy, indicating the possibility of lower priority in educational policy development during these periods.
+
+## Final Report
+
 
