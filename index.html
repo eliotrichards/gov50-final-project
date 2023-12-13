@@ -1549,13 +1549,13 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 <pre><code>
 The downloaded binary packages are in
-    /var/folders/1g/dm_tfx_j7nj7mby14ck1ndhw0000gn/T//Rtmpq7gDjO/downloaded_packages</code></pre>
+    /var/folders/1g/dm_tfx_j7nj7mby14ck1ndhw0000gn/T//Rtmpqp8hp0/downloaded_packages</code></pre>
 </div>
 <h2 id="project-thoughts">Project thoughts</h2>
 <p>For my final project, I am interested in exploring data related to government spending on education. Hopefully, my project will look at government spending on education in the United States, with the aim to examine yearly trends, the distribution of funds among different levels of education, and the comparison between spending and educational outcomes. To do this, I am planning on using the U.S. government’s education spending data, this should be easily accessible public information.</p>
 <h2 id="milestone-2">Milestone 2</h2>
 <p>The data set I will be using the following: <a href="https://github.com/erikgahner/PolData" class="uri">https://github.com/erikgahner/PolData</a>. Specifially, the data set entitled “Education Policies and Systems across Modern History.”</p>
-<p>Research question: How has federal government spending on education in the United States evolved and changed over the past decades? What is its impact on educational outcomes at different levels of the education system?</p>
+<p>Research question: How has federal government spending on education in the United States evolved and changed over the past decades? What is its impact on educational outcomes at different levels of the education system? How can we see the impact of implemented policies and their connection with the amount of funding and better education.</p>
 <p>Hypothesis: I will be trying to see if the increase in government spending on primary and secondary education in the United States, will positively correlate with improved standardized test scores among students, thereby reducing educational disparities. More over, I will be looking into targeted forms of investments meant to improve resource equity and allocation among schools.</p>
 <p>Given the outline of my thinking above, I will be looking at Government Spending on Primary and Secondary Education (measured as a percentage of GDP). This variable will depict the level of financial investment made by the government in primary and secondary education. Given the data set that I have chosen, this can be measured annually and I expect the outcome to vary over time. In my research, the outcome variable will be Standardized Test Scores, this outcome variable will allow me to measure educational performance. I will attempt to look at this on multiple levels–state, district, or school level–and can be collected over multiple years to track changes over time.</p>
 <p>To support my hypothesis, I will look for a positive correlation between increased government spending on education and improved standardized test scores among students over several years. Moreover, if a narrowing of the gap between students in high-resource and low-resource schools as government spending on education increases, my hypothesis will also be proved correct. Paradoxically, if there is no significant correlation between government spending on education and changes in standardized test scores, I was wrong in the initial hypothesis that I presented. Regardless of whether or not my initial thinking was correct or not, these patterns will help to determine whether increased government spending on education has a positive impact on educational outcomes and equity across public/governmentally funded schools.</p>
@@ -1610,8 +1610,275 @@ The downloaded binary packages are in
 </div>
 <p><img src="index_files/figure-html5/unnamed-chunk-5-1.png" width="624" /></p>
 </div>
-<p>This graph shows the number of educational policies that were created each year from 1950 to 2000. The higher the bar, the moer educational programs/policies were initiated that year, while the opposite is true for the lower bars. Moreover, this graph helps us to see when more policies were implemented, giving us a clear understand of when more money was spent to better education.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>This graph shows the number of educational policies that were created each year from 1950 to 2000. The higher the bar, the more educational programs/policies were initiated that year, while the opposite is true for the lower bars. Moreover, this graph helps us to see when more policies were implemented, giving us a clear understand of when more money was spent to better education.</p>
+<h2 id="milestone-4">Milestone 4</h2>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://yihui.org/knitr/'>knitr</a></span><span class='op'>)</span></span>
+<span></span>
+<span><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>education_data</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code> [1] &quot;name&quot;                 &quot;category&quot;            
+ [3] &quot;link&quot;                 &quot;topics&quot;              
+ [5] &quot;country&quot;              &quot;region_africa&quot;       
+ [7] &quot;region_asia&quot;          &quot;region_easteurope&quot;   
+ [9] &quot;region_latinamerica&quot;  &quot;region_westeurope&quot;   
+[11] &quot;year_start&quot;           &quot;year_end&quot;            
+[13] &quot;availability&quot;         &quot;registration&quot;        
+[15] &quot;free&quot;                 &quot;file_codebook&quot;       
+[17] &quot;file_csv&quot;             &quot;file_dta&quot;            
+[19] &quot;file_sav&quot;             &quot;file_excel&quot;          
+[21] &quot;file_r&quot;               &quot;file_zip&quot;            
+[23] &quot;variable_countryname&quot; &quot;variable_year&quot;       
+[25] &quot;variable_cow&quot;         &quot;doi_article&quot;         
+[27] &quot;doi_dataset&quot;          &quot;revised&quot;             
+[29] &quot;note&quot;                </code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>education_data_filtered</span> <span class='op'>&lt;-</span> <span class='va'>education_data</span><span class='op'>[</span><span class='va'>education_data</span><span class='op'>$</span><span class='va'>year_start</span> <span class='op'>&gt;=</span> <span class='fl'>1950</span> <span class='op'>&amp;</span> <span class='va'>education_data</span><span class='op'>$</span><span class='va'>year_start</span> <span class='op'>&lt;=</span> <span class='fl'>2000</span>, <span class='op'>]</span></span>
+<span></span>
+<span><span class='va'>summary_table</span> <span class='op'>&lt;-</span> <span class='va'>education_data_filtered</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>year_start</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>Count_of_Policies <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/context.html'>n</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>summary_table</span>, caption <span class='op'>=</span> <span class='st'>"Count of Educational Policies by Start Year (1950-2000)"</span><span class='op'>)</span></span></code></pre>
+</div>
+<table>
+<caption><span id="tab:unnamed-chunk-7">Table 1: </span>Count of Educational Policies by Start Year (1950-2000)</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">year_start</th>
+<th style="text-align: right;">Count_of_Policies</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1950</td>
+<td style="text-align: right;">15</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1951</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1952</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1953</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1954</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1955</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1956</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1957</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1958</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1960</td>
+<td style="text-align: right;">17</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1961</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1962</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1963</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1964</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1965</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1966</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1967</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1968</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1969</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1970</td>
+<td style="text-align: right;">16</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1971</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1972</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1973</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1974</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1975</td>
+<td style="text-align: right;">7</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1976</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1977</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1978</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1979</td>
+<td style="text-align: right;">11</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1980</td>
+<td style="text-align: right;">17</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1981</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1982</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1983</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1984</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1985</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1986</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1987</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1988</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1989</td>
+<td style="text-align: right;">14</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1990</td>
+<td style="text-align: right;">25</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1991</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1993</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1994</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1995</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1996</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1997</td>
+<td style="text-align: right;">8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1998</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1999</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">6</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Given the summary table output above, we can see that the count of educational policies by start year from 1950 to 2000 indicates several notable trends. The peaks in educational policy implementation in certain years, particularly in 1960, 1970, 1980, 1989, and 1990, highlight periods where more legislative or policy activity was applied to the education system. Paradoxically, in 1953, 1954, 1956, and 1974, there were minimal implementations of policy, indicating the possibility of lower priority in educational policy development during these periods.</p>
+<p>Specifically in regard to the spike in educational policies in 1990, the implementation of technology and electronic devices in schools across the country accounts for this. (<a href="https://files.eric.ed.gov/fulltext/EJ1099038.pdf" class="uri">https://files.eric.ed.gov/fulltext/EJ1099038.pdf</a>).</p>
+<h2 id="final-report">Final Report</h2>
+<p>For my project, I chose to explore data and research from the “Education Policies and Systems across Modern History” dataset (which is available on GitHub). This dataset allowed me to explore the extensive information about education, educational policy, and systems. Through analyzing and graphing the trends found within the data, I was able to see the impact of education-related governmental policies. The key variables that I explored above include ‘year_start’, which is the first year that the data record about educational policy. Secondly, this study also includes a focus on variables that measure the amount of government spending on education and the impact/outcome of the funding. Primarily, the data given in the study has a cross-sectional design, as most educational data is public published and readily available. This allowed for the exploration of different variables within a specific period, 1950 to 2000, resulting in an understanding of the trends and relationships in the data at a given point in time between the years stated.</p>
+<p>For the visualization aspect of the project, I chose to provide both a graphical representation as well as a table. These two visuals allow for a clear representation of the distribution of educational policies over time. The results from these graphs are as follows:</p>
+<ol type="1">
+<li><p>After studying the graphs, the main outcome examines the relationship between government spending on education and the resulting educational outcomes (eg. increase or decrease in academic success, increase or decrease in matriculation). These relationships are visually represented through the histogram and table, offering the reader an intuitive understanding of how changes in government spending correlate with shifts in numerous educational metrics.</p></li>
+<li><p>Additionally, the notion of regression analysis is employed to assess these relationships on a quantitative scale, looking at the output presented. The focus is on the main coefficients, time and number of educational policies, discussing its statistical significance and exploring whether the observed relationships can be interpreted as causal.</p></li>
+</ol>
+<p>To continue, it is my opinion that additional analyses may be, and should be, conducted to explore potential confounders or alternative explanations for the trends shown above, further enhancing why there is a relationship between government spending and educational outcomes.</p>
+<p>In conclusion, the research and interpretation shown above agree with my initial hypothesis assessment. Throughout the course of these pages, I have discussed the extent to which the graph and table trends correlate and support my first hypothesis that increased government spending correlates with improved educational outcomes. With all that being said, I would be remiss not to address the limitations of my analysis. There are definitely potential data gaps and confounding factors that would require further research into other sources to assuage.</p>
+<h2 id="bibliography">Bibliography</h2>
+<p>del Río, Adrián, et al. “Education Policies and Systems across Modern History: A Global Dataset.” V-Dem Institute,
+v-dem.net/media/publications/wp_138.pdf. Accessed 13 Dec. 2023.</p>
+<p>Dunning, Jeremy, et al. “Teaching and Learning with ICT Tools: Issues and Challenges from … - Ed.” Virtual Learning Worlds as a
+Bridge between Arts and Humanities and Science and Technology, Forum on Public Policy,
+files.eric.ed.gov/fulltext/EJ1096028.pdf. Accessed 13 Dec. 2023.</p>
+<p>Bates, Alan W., (1999). Managing Technological Change, Jossey Bass Publishers, San Francisco, 1999, 286.</p>
+<p>“100 Years Of American Education: A Statistical Portrait.” Edited by Thomas  D. Snyder, National Center For Education
+Statistics (NCES), U.S. Department Of Education, Office Of Education Research and Improvement, nces.ed.gov/pubs93/93442.pdf.
+Accessed 13 Dec. 2023.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
